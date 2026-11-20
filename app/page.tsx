@@ -19,7 +19,7 @@ const starter: DueItem[] = [
 ];
 
 const money = (n: number) => new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(n);
-const dayDiff = (date: string) => Math.ceil((new Date(date + "T23:59:59").getTime() - new Date().setHours(0,0,0,0)) / 86400000);
+const dayDiff = (date: string) => { const today = new Date(); today.setHours(0,0,0,0); const target = new Date(date + "T00:00:00"); return Math.round((target.getTime() - today.getTime()) / 86400000); };
 const dateLabel = (date: string) => new Date(date + "T00:00:00").toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
 
 export default function Home() {
